@@ -1,14 +1,19 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import Link from "next/link";
-import { signIn, signOut, useSession } from "next-auth/react";
-
+import { getOptionsForVote } from "@/utils/getRandomPokemon";
 import { trpc } from "../utils/trpc";
 
 const Home: NextPage = () => {
-  const hello = trpc.example.hello.useQuery({ text: "from tRPC" });
+  const [first, second] = getOptionsForVote();
 
-  return (
+  const { isLoading, data } = trpc.example.hello.useQuery({
+    text: "from tRPC",
+  });
+
+  return isLoading ? (
+    <div>...loading</div>
+  ) : (
     <>
       <Head>
         <title>Create T3 App</title>
@@ -19,11 +24,12 @@ const Home: NextPage = () => {
         <h1 className="m-12 text-center text-2xl text-pink-50">
           Which Pokemon is Rounder?
         </h1>
+        {data?.greeting}
         <div className="p-8" />
         <div className="flex max-w-2xl items-center justify-between rounded border  p-8 text-white">
-          <div className="h-16 w-16 bg-red-200"></div>
+          <div className="h-16 w-16 bg-red-200">{first}</div>
           <div className="p-8">VS</div>
-          <div className="h-16 w-16 bg-red-200"></div>
+          <div className="h-16 w-16 bg-red-200">{second}</div>
         </div>
       </main>
     </>
