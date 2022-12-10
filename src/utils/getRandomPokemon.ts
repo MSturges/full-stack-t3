@@ -1,4 +1,4 @@
-const MAX_DEX_ID = 5;
+const MAX_DEX_ID = 1008;
 
 export const getRandomPokemon: (notThisOne?: number) => number = (
   notThisOne
