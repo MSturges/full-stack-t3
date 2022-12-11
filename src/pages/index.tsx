@@ -23,6 +23,8 @@ const Home: NextPage = () => {
     id: second as number,
   });
 
+  console.log('firstPokemon', firstPokemon.data)
+
   return firstPokemon.isLoading || secondPokemon.isLoading ? (
     <div>...loading</div>
   ) : (
@@ -43,15 +45,15 @@ const Home: NextPage = () => {
               src={firstPokemon.data?.sprites.front_default as string}
               className="w-full"
             />
-            <div className="text-white">{firstPokemon.data?.pokemon.name}</div>
+            <div className="text-white text-xl pb-4">{firstPokemon.data?.name}</div>
           </div>
           <div className="p-8">VS</div>
-          <div className="flex h-80 w-80 flex-col items-center bg-red-800 ">
+          <div className="flex h-80 w-80 flex-col items-center bg-red-800">
             <img
               src={secondPokemon.data?.sprites.front_default as string}
               className="w-full"
             />
-            <div className="text-white">{secondPokemon.data?.pokemon.name}</div>
+            <div className="text-white text-xl pb-4">{secondPokemon.data?.name}</div>
           </div>
         </div>
       </main>

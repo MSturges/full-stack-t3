@@ -15,6 +15,7 @@ export const pokemonRouter = router({
       const api = new PokemonClient();
       const pokemon = await api.getPokemonFormById(input.id);
 
-      return pokemon;
+      const formatedData = { name: pokemon.name, sprites: pokemon.sprites };
+      return formatedData;
     }),
 });
